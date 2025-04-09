@@ -1,6 +1,7 @@
 package com.ralphcastellanos.ecommerceapp
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,10 +12,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +38,8 @@ fun LoginScreen(){
                 .padding(innerPadding)
                 .fillMaxSize()
                 .padding(horizontal = 30.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             Image(
                 painter = painterResource(R.drawable.logo_unab),
@@ -67,6 +73,42 @@ fun LoginScreen(){
                 },
                 shape = RoundedCornerShape(12.dp)
             )
+
+            Spacer(modifier = Modifier.height(28.dp))
+
+            OutlinedTextField(
+                value = "",
+                onValueChange = {},
+                modifier = Modifier.fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Lock,
+                        contentDescription = "Email",
+                        tint = Color(0xFFFF9900))
+                },
+                label = {
+                    Text(text = "Contraseña")
+                },
+                shape = RoundedCornerShape(12.dp)
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Button(
+                onClick = {}, modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF9900))
+            ) {
+                Text(text = "Iniciar Sesión")
+            }
+
+            Spacer(modifier = Modifier.height(28.dp))
+
+            TextButton(onClick = {}) {
+                Text(text = "¿No tienes cuenta? Regístrate", color = Color(0xFFFF9900))
+            }
         }
     }
 }
