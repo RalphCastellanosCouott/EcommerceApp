@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "457551505804",
+    "project_id": "ecommerce-app-8d915",
+    "storage_bucket": "ecommerce-app-8d915.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457551505804:android:229deb1bd575e7fa914ea9",
+        "android_client_info": {
+          "package_name": "com.ralphcastellanos.ecommerceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy-5biC8nAL75k7BKpBhqyRxTgHvVeOJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
