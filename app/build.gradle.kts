@@ -61,8 +61,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     //Esta es la librería para cargar imagenes de internet
-    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     //Esta es la dependencia de firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
+    implementation(platform(libs.firebase.bom))
 }

@@ -43,12 +43,13 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 @Composable
-fun LoginScreen(navController: NavController){
+fun LoginScreen(onSuccessfulLogin :()->Unit ={}, onClickRegister:()->Unit={}){
 
     //Estados de los input
     //var inputEmail = "hola"
     var inputEmail by remember { mutableStateOf("") }
     var inputPassword by remember { mutableStateOf("") }
+    var loginError by remember { mutableStateOf("") }
 
     val activity = LocalView.current.context as Activity
 
@@ -115,6 +116,14 @@ fun LoginScreen(navController: NavController){
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            if (loginError.isNotEmpty()){
+                Text(
+                    loginError,
+                    color = Color.Red,
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                )
+            }
+
             Button(
                 onClick = {
 
@@ -123,9 +132,9 @@ fun LoginScreen(navController: NavController){
                     auth.signInWithEmailAndPassword(inputEmail, inputPassword)
                         .addOnCompleteListener(activity){task ->
                             if(task.isSuccessful){
-                                navController.navigate("home")
+                                onSuccessfulLogin()
                             }else{
-                                Log.i("login", "Hubo un error")
+                                loginError = "Error al iniciar sesión"
                             }
                         }
 
@@ -140,9 +149,7 @@ fun LoginScreen(navController: NavController){
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            TextButton(onClick = {
-                navController.navigate("register")
-            }) {
+            TextButton(onClick =onClickRegister) {
                 Text(text = "¿No tienes cuenta? Regístrate", color = Color(0xFFFF9900))
             }
         }
