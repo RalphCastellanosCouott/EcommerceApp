@@ -34,10 +34,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(){
+fun HomeScreen(onClickLogout:() -> Unit = {}){
+    val auth = Firebase.auth
+    val user = auth.currentUser
     Scaffold(
         topBar = {
             val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -55,7 +59,10 @@ fun HomeScreen(){
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = {
+                        auth.signOut()
+                        onClickLogout()
+                    }) {
                         Icon(
                             imageVector = Icons.Default.AccountCircle,
                             contentDescription = "Localized description"
@@ -75,6 +82,12 @@ fun HomeScreen(){
         }
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
+            if(user != null){
+                Text(user.email.toString())
+            }else{
+                Text("No hay usuario")
+            }
+
             Text(text = "Promociones destacadas",
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, bottom = 8.dp))
 
