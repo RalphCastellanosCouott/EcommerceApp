@@ -59,10 +59,7 @@ fun HomeScreen(onClickLogout:() -> Unit = {}){
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        auth.signOut()
-                        onClickLogout()
-                    }) {
+                    IconButton(onClick = { }) {
                         Icon(
                             imageVector = Icons.Default.AccountCircle,
                             contentDescription = "Localized description"
@@ -70,7 +67,10 @@ fun HomeScreen(onClickLogout:() -> Unit = {}){
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = {
+                        auth.signOut()
+                        onClickLogout()
+                    }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                             contentDescription = "Localized description"

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -39,6 +40,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -163,6 +167,7 @@ fun RegisterScreen(onClickBack: ()-> Unit ={}, onSuccessfulRegister: ()-> Unit =
 
             OutlinedTextField(
                 value = inputPassword,
+                visualTransformation = PasswordVisualTransformation(),
                 onValueChange = {inputPassword = it},
                 modifier = Modifier.fillMaxWidth(),
                 leadingIcon = {
@@ -183,13 +188,19 @@ fun RegisterScreen(onClickBack: ()-> Unit ={}, onSuccessfulRegister: ()-> Unit =
                             color = Color.Red
                         )
                     }
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.None,
+                    autoCorrect = false,
+                    keyboardType = KeyboardType.Password
+                )
             )
 
             Spacer(modifier = Modifier.height(28.dp))
 
             OutlinedTextField(
                 value = inputPasswordConfirmation,
+                visualTransformation = PasswordVisualTransformation(),
                 onValueChange = {inputPasswordConfirmation = it},
                 modifier = Modifier.fillMaxWidth(),
                 leadingIcon = {
@@ -210,7 +221,12 @@ fun RegisterScreen(onClickBack: ()-> Unit ={}, onSuccessfulRegister: ()-> Unit =
                             color = Color.Red
                         )
                     }
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.None,
+                    autoCorrect = false,
+                    keyboardType = KeyboardType.Password
+                )
             )
 
             if(registerError.isNotEmpty()){
@@ -231,13 +247,13 @@ fun RegisterScreen(onClickBack: ()-> Unit ={}, onSuccessfulRegister: ()-> Unit =
                     passwordError = validatePassword(inputPassword).second
                     confirmationPasswordError = validateConfirmationPassword(inputPassword, inputPasswordConfirmation).second
 
-                    /*if (isValidName && isValidEmail && isValidPassword && isValidConfirmationPassword){
+                    if (isValidName && isValidEmail && isValidPassword && isValidConfirmationPassword){
                         auth.createUserWithEmailAndPassword(inputEmail, inputPassword).
                             addOnCompleteListener(activity){task ->
                                 if (task.isSuccessful){
                                     onSuccessfulRegister()
                                 }else{
-                                    registerError = when(task.isSuccessful){
+                                    registerError = when(task.exception){
                                         is FirebaseAuthInvalidCredentialsException -> "Correo invalido"
                                         is FirebaseAuthUserCollisionException -> "Correo ya registrado"
                                         else -> "Error al registrarse"
@@ -246,7 +262,7 @@ fun RegisterScreen(onClickBack: ()-> Unit ={}, onSuccessfulRegister: ()-> Unit =
                             }
                     }else{
                         registerError = "Hubo un error en el register"
-                    }*/
+                    }
 
                 }, modifier = Modifier
                     .fillMaxWidth()

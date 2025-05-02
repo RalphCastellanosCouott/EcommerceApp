@@ -8,7 +8,7 @@ fun validateEmail(email: String): Pair<Boolean, String>{
     return when{
         email.isEmpty() -> Pair(false, "El correo es requerido")
         !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> Pair(false, "El correo es inválido")
-        email.endsWith("@unab.edu.co")-> Pair(false, "Ese email no es de la UNAB")
+        !email.endsWith("@gmail.com")-> Pair(false, "Ese email no es válido")
         else -> Pair(true, "")
     }
 }

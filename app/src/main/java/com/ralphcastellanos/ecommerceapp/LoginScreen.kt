@@ -179,7 +179,7 @@ fun LoginScreen(onClickRegister:()->Unit={}, onSuccessfulLogin :()->Unit ={}){
                                     onSuccessfulLogin()
                                 }else{
                                     loginError = when(task.exception){
-                                        is FirebaseAuthInvalidCredentialsException -> "Correo o contraseña incorrect"
+                                        is FirebaseAuthInvalidCredentialsException -> "Correo o contraseña incorrectas"
                                         is FirebaseAuthInvalidUserException -> "No existe una cuenta con este correo"
                                         else -> "Error al iniciar sesión. Intenta de nuevo"
                                     }
